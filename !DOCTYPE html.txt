@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025年までのカウントダウン</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    .countdown {
+      text-align: center;
+      font-size: 48px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown">
+    <p>2025年までのカウントダウン</p>
+    <div id="timer">00日 00:00:00</div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date('2025-01-01T00:00:00'); // 2025年1月1日0時0分0秒
+      const currentDate = new Date();
+      const remainingTime = targetDate - currentDate;
+
+      if (remainingTime > 0) {
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
+        const seconds = Math.floor((remainingTime / 1000) % 60);
+
+        document.getElementById('timer').innerHTML = 
+          `${days}日 ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      } else {
+        document.getElementById('timer').innerHTML = "00日 00:00:00";
+        clearInterval(timerInterval); // カウントダウンを停止
+      }
+    }
+
+    // 1秒ごとにカウントダウンを更新
+    const timerInterval = setInterval(updateCountdown, 1000);
+
+    // 初回実行
+    updateCountdown();
+  </script>
+</body>
+</html>
